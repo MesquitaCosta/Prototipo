@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtMensagem" min="-2" pref="226" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEnviar" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="lblMensagem" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblIpOrigem" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIpOrigem" min="-2" pref="109" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="lblPortaOrigem" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPortaOrigem" alignment="2" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lblPortaDestino" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPortaDestino" alignment="2" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblNumeroSequencia" max="32767" attributes="0"/>
+                          <Component id="txtNumeroSequencia" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblIpDestino" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIpDestino" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                          <Component id="txtJanelaRecepcao" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                          <Component id="lblJanelaRecepcao" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Group type="102" alignment="2" attributes="0">
+                              <Component id="chkACK" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="lblNumeroRecepcao" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNumeroRecepcao" alignment="2" min="-2" pref="102" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="chkURG" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="chkPSH" min="-2" max="-2" attributes="0"/>
+                                  <Component id="chkRST" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="chkFIN" min="-2" max="-2" attributes="0"/>
+                                  <Component id="chkSYN" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="sliderTamanhoMensagem" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblTamanhoMensagem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtTamanhoMensagem" min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblMegaBytes" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPortaOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNumeroSequencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIpOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtIpOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPortaOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNumeroSequencia" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtIpDestino" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPortaDestino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblIpDestino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNumeroRecepcao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtNumeroRecepcao" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPortaDestino" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblJanelaRecepcao" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtJanelaRecepcao" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="chkSYN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkPSH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="chkRST" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkFIN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="chkURG" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="chkACK" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblTamanhoMensagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTamanhoMensagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMegaBytes" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="sliderTamanhoMensagem" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblMensagem" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtMensagem" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="btnEnviar" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JSlider" name="sliderTamanhoMensagem">
+      <Properties>
+        <Property name="maximum" type="int" value="300"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="value" type="int" value="150"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTamanhoMensagem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tamanho da Mensagem"/>
+        <Property name="toolTipText" type="java.lang.String" value="Deslize a barra para aumentar ou diminuir o tamanho"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTamanhoMensagem">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="text" source="sliderTamanhoMensagem" sourcePath="${value}" target="txtTamanhoMensagem" targetPath="text" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTamanhoMensagemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMensagem">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMensagem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mensagem"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMegaBytes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MB"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtIpOrigem">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIpOrigemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIpOrigem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IP de Origem"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtIpDestino">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIpDestino">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IP de Destino"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtJanelaRecepcao">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblJanelaRecepcao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Janela de Recep&#xe7;&#xe3;o"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNumeroSequencia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de Sequ&#xea;ncia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNumeroRecepcao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de Recep&#xe7;&#xe3;o"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPortaOrigem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Porta de Origem"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPortaDestino">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Porta de Destino"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtPortaDestino">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="5000"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtNumeroRecepcao">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkSYN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SYN"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkFIN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="FIN"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="txtPortaOrigem">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="5000"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEnviar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enviar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnviarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkURG">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="URG"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkPSH">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PSH"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkACK">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ACK"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkRST">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RST"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNumeroSequencia">
+    </Component>
+  </SubComponents>
+</Form>
