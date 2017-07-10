@@ -9,6 +9,7 @@ import aplicacao.Mensagem;
 import aplicacao.Mensagem.Action;
 import aplicacao.Pacote;
 import aplicacao.PainelPacote;
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -152,12 +153,13 @@ public class BemVindo extends javax.swing.JFrame {
 
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
             adicionarNovoPainel(aba);
+
         } else {
-            System.out.println("MSS origem" + mensagem.getMSS());
-            mssOrigem = mensagem.getMSS();
+
             aba = new PainelPacote(mensagem, service);
             JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba));
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
+            aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
         }
     }
 
@@ -228,9 +230,14 @@ public class BemVindo extends javax.swing.JFrame {
                     pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
                     //contendo os dados
-                    defineTamanhoSegmento();
+
                 } else {
-                    pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + mensagem.getMSS());
+                    if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
+                        pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + defineTamanhoSegmento());
+                    } else {
+                        pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + defineTamanhoSegmento());
+                        System.out.println("TAMANHO MSS: " + defineTamanhoSegmento());
+                    }
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
                 }
 
@@ -259,35 +266,37 @@ public class BemVindo extends javax.swing.JFrame {
         }
     }
 
-    
-    
-    private void defineTamanhoSegmento() {
+    private int defineTamanhoSegmento() {
 
-        if (mensagem.getMSS()>mssOrigem) {
-            mensagem.setMSS(mssOrigem);
-            System.out.println("MSS origem" + mssOrigem);
-            System.out.println("MSS msg" + mensagem.getMSS());
+        if (mensagem.getMssEmissor() >= mensagem.getMssReceptor()) {
+
+            return mensagem.getMssReceptor();
+        } else {
+            return mensagem.getMssEmissor();
         }
     }
-    
-    
 
     private int quantidadePacotes() {
 
-        return (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela() / mensagem.getMSS());
+        return (mensagem.getTamanhoMensagem() / defineTamanhoSegmento());
     }
 
     private void enviarPacotes() {
+        System.out.println("MSS EMISSOR: " + mensagem.getMssEmissor());
+        System.out.println("MSS Receptor: " + mensagem.getMssReceptor());
+        System.out.println("MSS Menor: " + defineTamanhoSegmento());
+
+        System.out.println("Quantidade de Pacotes: " + quantidadePacotes());
         if (this.count == (quantidadePacotes())) {
+
             //Finaliza e Exibi a mensagem
-        }
+        } else {
 
-        for (int i = 0; i <= (quantidadePacotes()); i++) {
+            short janelaRecepção = mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getTamanhoJanela();
 
-            while (i <= mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela()) {
-
+            while (janelaRecepção > 0) {
                 setarPaineis();
-                mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setTamanhoJanela((short) (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela() - 1));
+                janelaRecepção--;
                 this.count++;
             }
         }
@@ -322,7 +331,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     private int DadosRestantes() {
 
-        return (mensagem.getTamanhoMensagem() - mensagem.getMSS());
+        return (mensagem.getTamanhoMensagem() - defineTamanhoSegmento());
     }
 
     private void aceitarPacote() {
@@ -360,13 +369,13 @@ public class BemVindo extends javax.swing.JFrame {
 
         if (paineis.size() >= 2) {
             painel.setTxtOptionsX("-----");
+            painel.setTxtDadosX(String.valueOf(defineTamanhoSegmento()));
         }
         painel.setTxtIpOrigemX(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem());
         painel.setTxtIpDestinoX(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpDestino());
         painel.setTxtNumeroSequenciaX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia()));
         painel.setTxtNumeroRecepcaoX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao()));
         painel.setTxtJanelaRecepcaoX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela()));
-        painel.setTxtOptionsX(String.valueOf(mensagem.getMSS()));
 
         try {
             if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
@@ -395,9 +404,11 @@ public class BemVindo extends javax.swing.JFrame {
                 } else if (mensagem.getPacotes().size() == 3) {
                     painel.getSYN().setSelected(true);
                     painel.getACK().setSelected(true);
+                    painel.setTxtOptionsX(String.valueOf(mensagem.getMssReceptor()));
                 } else {
                     painel.getACK().setSelected(true);
-                    painel.setTxtDadosX(String.valueOf(mensagem.getMSS()));
+                    painel.setTxtDadosX(String.valueOf(defineTamanhoSegmento()));
+                    painel.setTxtOptionsX(String.valueOf(painel.getTxtDadosX()));
                 }
             }
         } catch (UnknownHostException ex) {
@@ -413,7 +424,7 @@ public class BemVindo extends javax.swing.JFrame {
                     painel.getBarraProgresso().setValue(painel.getBarraProgresso().getValue() + 1);
                 } else {
                     timer.stop();
-                    System.out.println("Tempo Finalizado");
+                    //System.out.println("Tempo Finalizado");
                 }
             }
         };
@@ -1553,7 +1564,6 @@ public class BemVindo extends javax.swing.JFrame {
         preencherPainel(aba);
         System.out.println("Janela recp após preencher:" + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela());
         JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
-
     }//GEN-LAST:event_btnThreeWayHandshakeActionPerformed
 
     private void txtIpOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIpOrigemActionPerformed
@@ -1783,5 +1793,4 @@ public class BemVindo extends javax.swing.JFrame {
     private ActionListener atualizaBarra;
     private PainelPacote aba;
     private int count = 0;
-    private int mssOrigem;
 }

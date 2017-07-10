@@ -20,8 +20,8 @@ public class Mensagem implements Serializable{
     private Set<String> usuariosOnline = new HashSet<String>();
     private Action action;//para cada mensagem, já é informada a ação desejada
     private ArrayList<Pacote> pacotes = new ArrayList<Pacote>(); //cada mensagem enviada é dividida em pacotes. Cada item desta lista corresponde a um pacote enviado
-    private int MSS = 536;
-    
+    private int mssEmissor = 536;
+    private int mssReceptor = 536;
     public int getIdMensagem() {
         return idMensagem;
     }
@@ -107,12 +107,20 @@ public class Mensagem implements Serializable{
         this.pacotes = pacotes;
     }
 
-    public int getMSS() {
-        return MSS;
+    public int getMssEmissor() {
+        return mssEmissor;
     }
 
-    public void setMSS(int MSS) {
-        this.MSS = MSS;
+    public void setMssEmissor(int mssEmissor) {
+        this.mssEmissor = mssEmissor;
+    }
+
+    public int getMssReceptor() {
+        return mssReceptor;
+    }
+
+    public void setMssReceptor(int mssReceptor) {
+        this.mssReceptor = mssReceptor;
     }
     
     

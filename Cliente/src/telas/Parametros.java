@@ -278,39 +278,42 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
 
         try {
             if (mensagem.getIpDestino().equals(InetAddress.getLocalHost().getHostAddress())) {
-                
+
                 mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setTamanhoJanela(Short.valueOf(txtTamanhoJanela.getText()));
+                mensagem.setMssReceptor(Integer.valueOf(txtMSS.getText()));
+
+            }else{
+                mensagem.setMssEmissor(Integer.valueOf(txtMSS.getText()));
             }
         } catch (UnknownHostException ex) {
             Logger.getLogger(Parametros.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         mensagem.setTamanhoMensagem(Short.valueOf(txtQuantidadeDados.getText()));
         mensagem.setMensagem(txtMensagem.getText());
-        mensagem.setMSS(Integer.valueOf(txtMSS.getText()));
-
+        
         fecharParametros(aba);
         return mensagem;
     }
 
     public void preenche(PainelPacote painel) {
-
-        painel.setTxtOptionsX(String.valueOf(mensagem.getMSS()));
-
+        
         try {
             if (mensagem.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
 
                 painel.getSYN().setSelected(true);
+                painel.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
+                
             } else {
 
                 painel.setTxtJanelaRecepcaoX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela()));
                 painel.getSYN().setSelected(true);
                 painel.getACK().setSelected(true);
+                painel.setTxtOptionsX(String.valueOf(mensagem.getMssReceptor()));              
             }
         } catch (UnknownHostException ex) {
             Logger.getLogger(Parametros.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         this.mensagem.setAction(Mensagem.Action.ENVIAR);
         this.service.enviar(mensagem);
     }
