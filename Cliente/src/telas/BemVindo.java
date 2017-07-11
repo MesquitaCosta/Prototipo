@@ -34,6 +34,8 @@ import service.ClienteService;
 import javax.swing.Timer;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -153,8 +155,8 @@ public class BemVindo extends javax.swing.JFrame {
         if (JtabAbas.getTabCount() > (mensagem.getIdMensagem())) {
 
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
-             
-            identificaPacotesRecebidos(mensagem);
+
+            exibePacotesRecebidos(ultimoPacoteEnviado(mensagem));
 
         } else {
 
@@ -164,24 +166,32 @@ public class BemVindo extends javax.swing.JFrame {
             aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
         }
     }
-    
-    private void identificaPacotesRecebidos(Mensagem mensagem){
-        
-         for(int i = mensagem.getPacotes().size(); i>1; i--){
-                try {
-                    if(mensagem.getPacotes().get((i-1)).getIpOrigem().equals((InetAddress.getLocalHost().getHostAddress()))){
-                        
-                        while(i<mensagem.getPacotes().size()){
-                                               
-                            adicionarNovoPainel(aba, mensagem.getPacotes().get(i));
-                            i++;
-                        }
-                        break;
-                    }
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
+
+    private int ultimoPacoteEnviado(Mensagem mensagem) {
+
+        int indice = 0;
+        for (int i = mensagem.getPacotes().size(); i > 1; i--) {
+            try {
+                if (mensagem.getPacotes().get((i - 1)).getIpOrigem().equals((InetAddress.getLocalHost().getHostAddress()))) {
+
+                    indice = i-1;
+                    break;
                 }
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        return indice;      
+    }
+
+    private void exibePacotesRecebidos(int indice) {
+
+        indice++;
+        while (indice < mensagem.getPacotes().size()) {
+
+            adicionarNovoPainel(aba, mensagem.getPacotes().get(indice));
+            indice++;
+        }
     }
 
     private void verificarACK(Mensagem mensagem) {
@@ -275,7 +285,7 @@ public class BemVindo extends javax.swing.JFrame {
                     pacote.setNumeroSequencia(valorAleatorio());
 
                 } else {
-                    pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + 1);
+                    pacote.setNumeroSequencia(ultimoPacoteEnviado(mensagem) + 1);
 
                 }
                 pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
@@ -319,7 +329,7 @@ public class BemVindo extends javax.swing.JFrame {
                 setarPaineis();
                 janelaRecepção--;
                 this.count++;
-                
+
             }
         }
         this.mensagem.setAction(Action.ENVIAR);
@@ -388,21 +398,19 @@ public class BemVindo extends javax.swing.JFrame {
         painel.painelScroll.repaint();
     }
 
-    
-    private void preencherPainel(PainelPacote painel, Pacote pacote){
-        
+    private void preencherPainel(PainelPacote painel, Pacote pacote) {
+
         if (paineis.size() >= 2) {
             painel.setTxtOptionsX("-----");
             painel.setTxtDadosX(String.valueOf(defineTamanhoSegmento()));
         }
-        
+
         painel.setTxtIpOrigemX(pacote.getIpOrigem());
         painel.setTxtIpDestinoX(pacote.getIpDestino());
         painel.setTxtNumeroSequenciaX(String.valueOf(pacote.getNumeroSequencia()));
         painel.setTxtNumeroRecepcaoX(String.valueOf(pacote.getNumeroAvisoRecepcao()));
         painel.setTxtJanelaRecepcaoX(String.valueOf(pacote.getTamanhoJanela()));
-        
-        
+
         try {
             if (pacote.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
                 painel.getBtnAceitar().setVisible(false);
@@ -441,8 +449,7 @@ public class BemVindo extends javax.swing.JFrame {
             Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    } 
-    
+    }
 
     private void carregarBarraprogresso(PainelPacote painel) {
 
