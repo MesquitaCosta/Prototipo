@@ -25,7 +25,7 @@ public class ClienteService {
         
         try {
             
-            this.socket = new Socket("localhost", 5000); //IP do Servidor
+            this.socket = new Socket("172.16.0.210", 5000); //IP do Servidor
             this.output = new ObjectOutputStream(socket.getOutputStream());
             
         } catch (IOException ex) {

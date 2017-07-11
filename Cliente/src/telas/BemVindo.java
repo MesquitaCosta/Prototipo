@@ -153,9 +153,21 @@ public class BemVindo extends javax.swing.JFrame {
         if (JtabAbas.getTabCount() > (mensagem.getIdMensagem())) {
 
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
-            
-            
-            for(int i = mensagem.getPacotes().size(); i>2; i--){
+             
+            identificaPacotesRecebidos(mensagem);
+
+        } else {
+
+            aba = new PainelPacote(mensagem, service);
+            JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem))));
+            JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
+            aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
+        }
+    }
+    
+    private void identificaPacotesRecebidos(Mensagem mensagem){
+        
+         for(int i = mensagem.getPacotes().size(); i>1; i--){
                 try {
                     if(mensagem.getPacotes().get((i-1)).getIpOrigem().equals((InetAddress.getLocalHost().getHostAddress()))){
                         
@@ -170,16 +182,6 @@ public class BemVindo extends javax.swing.JFrame {
                     Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-            
-
-        } else {
-
-            aba = new PainelPacote(mensagem, service);
-            JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem))));
-            JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
-            aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
-        }
     }
 
     private void verificarACK(Mensagem mensagem) {

@@ -106,9 +106,9 @@ public class PainelPacote extends JPanel {
         parametros = new Parametros(this, service, mensagem);
         painelParametros.add(parametros);
 
-        painelPrincipal.setPreferredSize(new Dimension(1200, 900));      
-        painelDesktop.setPreferredSize(new Dimension(1400, 900));      
-        scroll.setPreferredSize(new Dimension(1100, 800));
+        painelPrincipal.setPreferredSize(new Dimension(1000, 900));      
+        painelDesktop.setPreferredSize(new Dimension(1000, 900));      
+        scroll.setPreferredSize(new Dimension(1000, 800));
         
         painelPrincipal.setBackground(Color.gray);
         painelDesktop.setOpaque(false);
