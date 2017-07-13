@@ -348,6 +348,8 @@ public class BemVindo extends javax.swing.JFrame {
                 mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setAceito(true);
                 
                 adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
+                this.mensagem.setAction(Action.ENVIAR);
+                this.service.enviar(mensagem);
             }
         } catch (UnknownHostException ex) {
             Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
