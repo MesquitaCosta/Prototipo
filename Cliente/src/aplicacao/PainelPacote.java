@@ -91,7 +91,7 @@ public class PainelPacote extends JPanel {
     JTextField txtDadosX;
     JTextField txtChecsumX;
     JTextField txtOptionsX;
-    JButton btnAceitar;
+    public JButton btnAceitar;
     JButton btnRecusar;
     public JProgressBar barraProgresso;
 
