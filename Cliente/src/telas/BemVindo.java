@@ -275,6 +275,9 @@ public class BemVindo extends javax.swing.JFrame {
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
                     //contendo os dados
 
+                } else if (verificaSeReenvio(pacoteAtual)) {
+                    pacote.setNumeroSequencia(pacoteAtual.getNumeroAvisoRecepcao());
+
                 } else {
                     if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
                         pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + defineTamanhoSegmento());
@@ -282,8 +285,9 @@ public class BemVindo extends javax.swing.JFrame {
                         pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + defineTamanhoSegmento());
                         System.out.println("TAMANHO MSS: " + defineTamanhoSegmento());
                     }
-                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
                 }
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
+                
 
                 mensagem.getPacotes().add(pacote);
 
@@ -309,6 +313,21 @@ public class BemVindo extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private boolean verificaSeReenvio(Pacote pacote) {
+
+        boolean retorno = false;
+        for (Pacote item : mensagem.getPacotes()) {
+            try {
+                if (pacote.getNumeroAvisoRecepcao() == item.getNumeroSequencia() && item.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
+                    retorno = true;
+                }
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return retorno;
     }
 
     private int defineTamanhoSegmento() {
@@ -495,7 +514,7 @@ public class BemVindo extends javax.swing.JFrame {
     }
 
     private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt, Pacote pacote) {
-        
+
         System.out.println("---------------------- \n --------------");
         System.out.println("Recebendo BOTÃO ACeitar:");
         System.out.println("Qtd Pacotes: " + mensagem.getPacotes().size());
