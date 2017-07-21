@@ -277,6 +277,7 @@ public class BemVindo extends javax.swing.JFrame {
 
                 } else if (verificaSeReenvio(pacoteAtual)) {
                     pacote.setNumeroSequencia(pacoteAtual.getNumeroAvisoRecepcao());
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
 
                 } else {
                     if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
@@ -285,8 +286,9 @@ public class BemVindo extends javax.swing.JFrame {
                         pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + defineTamanhoSegmento());
                         System.out.println("TAMANHO MSS: " + defineTamanhoSegmento());
                     }
-                }
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
+                }
+                    
                 
 
                 mensagem.getPacotes().add(pacote);
