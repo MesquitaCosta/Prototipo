@@ -103,7 +103,7 @@ public class BemVindo extends javax.swing.JFrame {
 
                     } else if (action.equals(Action.ENVIAR)) {
                         receber(mensagem);
-                        System.out.println(mensagem.getPacotes().size());
+                        //System.out.println(mensagem.getPacotes().size());
                     } else if (action.equals(Action.USUARIOS_ONLINE)) {
 
                         usuariosOnline(mensagem);
@@ -160,6 +160,7 @@ public class BemVindo extends javax.swing.JFrame {
         System.out.println("Qtd Pacotes: " + mensagem.getPacotes().size());
         System.out.println("NumSeq: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
         System.out.println("NumRecp: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
+        System.out.println("Janela:" + janelaRecepção);
         System.out.println("----------------------");
 
         if (JtabAbas.getTabCount() > (mensagem.getIdMensagem())) {
@@ -221,7 +222,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     private void usuariosOnline(Mensagem mensagem) {
 
-        System.out.println(mensagem.getUsuariosOnline().toString());
+        System.out.println("Usuários online: " + mensagem.getUsuariosOnline().toString());
 
         Set<String> usuarios = mensagem.getUsuariosOnline();
 
@@ -268,8 +269,8 @@ public class BemVindo extends javax.swing.JFrame {
                 } else if (mensagem.getPacotes().size() <= 3) {
                     pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + 1);
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
-                    janelaRecepção = (short) mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela();
-                    System.out.println("teste numero recepção: " + janelaRecepção);
+                    janelaRecepção = (short) mensagem.getPacotes().get(ultimoPacoteEnviado(mensagem) + 1).getTamanhoJanela();
+                    //System.out.println("teste numero recepção: " + janelaRecepção);
                 } else if (mensagem.getPacotes().size() == 4) {
                     pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
                     pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
@@ -368,7 +369,7 @@ public class BemVindo extends javax.swing.JFrame {
                 }
                 this.mensagem.setAction(Action.ENVIAR);
                 this.service.enviar(mensagem);
-                System.out.println("Pacotes: " + mensagem.getPacotes().size() + "/n Count: " + this.count);
+                System.out.println("Eviar Pacote \n Pacotes: " + mensagem.getPacotes().size() + "\n Count: " + this.count);
 
             } else {
 
@@ -468,6 +469,7 @@ public class BemVindo extends javax.swing.JFrame {
             } else {
                 if (mensagem.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
                     painel.btnAceitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Enviar1.png")));
+                    painel.btnAceitar.setToolTipText("Enviar Próximo Pacote");
 
                 }
                 painel.getBarraProgresso().setVisible(false);
