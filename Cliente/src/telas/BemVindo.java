@@ -200,7 +200,7 @@ public class BemVindo extends javax.swing.JFrame {
         indice++;
         while (indice < mensagem.getPacotes().size()) {
 
-            janelaRecepção++;
+            
             adicionarNovoPainel(aba, mensagem.getPacotes().get(indice));
             indice++;
 
@@ -222,7 +222,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     private void usuariosOnline(Mensagem mensagem) {
 
-        System.out.println("Usuários online: " + mensagem.getUsuariosOnline().toString());
+        System.out.println("Dispositivos online: " + mensagem.getUsuariosOnline().toString());
 
         Set<String> usuarios = mensagem.getUsuariosOnline();
 
@@ -309,7 +309,7 @@ public class BemVindo extends javax.swing.JFrame {
 
                 }
                 pacote.setNumeroAvisoRecepcao(pacoteAtual.getNumeroSequencia() + defineTamanhoSegmento());
-
+                pacote.setTamanhoJanela(janelaRecepção);
                 mensagem.getPacotes().add(pacote);
             }
 
@@ -525,6 +525,7 @@ public class BemVindo extends javax.swing.JFrame {
         System.out.println("NumSeq: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
         System.out.println("NumRecp: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
         System.out.println("----------------------");
+        janelaRecepção++;
 //estou enviando junto o pacote em questão, para que seja modificado com um foreach
         if (paineis.size() == 1) {
             setarValores(pacote);
