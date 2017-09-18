@@ -42,6 +42,7 @@ public class PainelPacote extends JPanel {
     public JDesktopPane painelDesktop;
     public JInternalFrame painelParametros;
     public Parametros parametros;
+    //public JPanel painelJanela; Possivelmente inserir um recurso visual para mostrar a janela de recepção
 
     JLabel lbl1;
     JLabel lbl2;
@@ -92,7 +93,7 @@ public class PainelPacote extends JPanel {
     JTextField txtChecsumX;
     JTextField txtOptionsX;
     public JButton btnAceitar;
-    JButton btnRecusar;
+    public JButton btnRecusar;
     public JProgressBar barraProgresso;
 
     public PainelPacote(Mensagem mensagem,ClienteService service) {
@@ -105,12 +106,15 @@ public class PainelPacote extends JPanel {
         painelParametros = new JInternalFrame();
         parametros = new Parametros(this, service, mensagem);
         painelParametros.add(parametros);
-
-        painelPrincipal.setPreferredSize(new Dimension(1000, 900));      
-        painelDesktop.setPreferredSize(new Dimension(1000, 900));      
-        scroll.setPreferredSize(new Dimension(1000, 800));
+        //painelJanela = new JPanel();
         
-        painelPrincipal.setBackground(Color.gray);
+
+             
+        painelDesktop.setPreferredSize(new Dimension(600, 600));      
+        scroll.setPreferredSize(new Dimension(820, 600));
+        
+        painelPrincipal.setBackground(new java.awt.Color(0,102,51));
+        painelPrincipal.setPreferredSize(new Dimension(820, 800)); 
         painelDesktop.setOpaque(false);
         painelDesktop.add(painelParametros);
         painelParametros.setVisible(true);
@@ -119,9 +123,11 @@ public class PainelPacote extends JPanel {
         painelPrincipal.add(scroll);
         scroll.add(painelScroll);
    
-        this.add(painelDesktop);
+        //this.add(painelJanela); Possivelmente inserir um recurso visual para mostrar a janela de recepção
+        
         this.add(painelPrincipal);
-
+        this.add(painelDesktop);        
+        this.setBackground(new java.awt.Color(0,102,51));
         
         //painel.add(scroll);
         /*painel.add(lbl1);
@@ -151,23 +157,6 @@ public class PainelPacote extends JPanel {
         return painelInterno;
     }
     
-    public JPanel novoPainelVazio() {
-
-        painelInterno = new JPanel();
-        JLabel lblAviso = new JLabel("Three Way Handshake Concluido");
-        lblAviso.setFont(new Font("SansSerif",Font.BOLD,30));
-
-        painelInterno.add(lblAviso);
-        painelInterno.setPreferredSize(new Dimension(990, 50));
-        
-        painelInterno.setBackground(new java.awt.Color(102, 153, 102));
-        painelInterno.setBorder(BorderFactory.createLineBorder(Color.WHITE, 12));
-
-        scroll.setViewportView(painelScroll);
-        return painelInterno;
-    }
-    
-
     public void criarCampos(JPanel painel, JPanel painelFlags) {
 
         lbl1 = new JLabel("");
@@ -200,12 +189,36 @@ public class PainelPacote extends JPanel {
         lblOptionsX = new JLabel("Options");
         lblFLAGS = new JLabel("FLAGS");
 
+        Font fonte = new Font("Tahoma", Font.LAYOUT_LEFT_TO_RIGHT,8);
         URG = new JCheckBox("URG");
+        URG.setFont(fonte);
+        URG.setIconTextGap(0);
+        URG.setEnabled(false);
+        
         PSH = new JCheckBox("PSH");
+        PSH.setFont(fonte);
+        PSH.setIconTextGap(0);
+        PSH.setEnabled(false);
+        
         SYN = new JCheckBox("SYN");
+        SYN.setFont(fonte);
+        SYN.setIconTextGap(0);
+        SYN.setEnabled(false);
+        
         ACK = new JCheckBox("ACK");
+        ACK.setFont(fonte);
+        ACK.setIconTextGap(0);
+        ACK.setEnabled(false);
+        
         RST = new JCheckBox("RST");
+        RST.setFont(fonte);
+        RST.setIconTextGap(0);
+        RST.setEnabled(false);
+        
         FIN = new JCheckBox("FIN");
+        FIN.setFont(fonte);
+        FIN.setIconTextGap(0);
+        FIN.setEnabled(false);
 
         txtIpOrigemX = new JTextField();
         txtPortaOrigemX = new JTextField();
@@ -222,7 +235,7 @@ public class PainelPacote extends JPanel {
         btnRecusar = new JButton();
         barraProgresso = new JProgressBar();
 
-        painel.setPreferredSize(new Dimension(990, 230));
+        painel.setPreferredSize(new Dimension(800, 230));
         painel.setBackground(new java.awt.Color(102, 153, 102));
         painel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 12));
 
@@ -239,7 +252,7 @@ public class PainelPacote extends JPanel {
         painelFlags.add(RST);
         painelFlags.add(FIN);
 
-        painel.setLayout(new GridLayout(6, 7));
+        painel.setLayout(new GridLayout(6, 7, 3, 3));
 
         painel.add(lblIpOrigemX);
         painel.add(lblPortaOrigemX);

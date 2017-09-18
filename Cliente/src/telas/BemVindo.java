@@ -40,6 +40,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -155,11 +163,11 @@ public class BemVindo extends javax.swing.JFrame {
         this.mensagem = mensagem;
 
         verificarACK(mensagem);
-
+        janelaRecepção = mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getTamanhoJanela();
         System.out.println("Recebendo:");
         System.out.println("Qtd Pacotes: " + mensagem.getPacotes().size());
-        System.out.println("NumSeq: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
-        System.out.println("NumRecp: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
+        System.out.println("NumSeq: " + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia());
+        System.out.println("NumRecp: " + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
         System.out.println("Janela:" + janelaRecepção);
         System.out.println("----------------------");
 
@@ -172,7 +180,7 @@ public class BemVindo extends javax.swing.JFrame {
         } else {
 
             aba = new PainelPacote(mensagem, service);
-            JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem))));
+            JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem))));
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
             aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
         }
@@ -209,9 +217,9 @@ public class BemVindo extends javax.swing.JFrame {
 
     private void verificarACK(Mensagem mensagem) {
 
-        if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).isAceito()) {
+        if (mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).isAceito()) {
             for (Pacote pacote : mensagem.getPacotes()) {
-                if ((mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao() - defineTamanhoSegmento()) == pacote.getNumeroSequencia()) {
+                if ((mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao() - defineTamanhoSegmento()) == pacote.getNumeroSequencia()) {
                     showMessageDialog(null, "Recebimento do Pacote NumSeq: " + pacote.getNumeroSequencia() + " foi CONFIRMADO");
 
                 }
@@ -262,32 +270,32 @@ public class BemVindo extends javax.swing.JFrame {
                 pacote.setPortaOrigem((short) 5000);
                 pacote.setPortaDestino((short) 5000);
 
-                if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao() == 0) {
+                if (mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao() == 0) {
                     pacote.setNumeroSequencia(valorAleatorio());
                     pacote.setAceito(false);
 
                 } else if (mensagem.getPacotes().size() <= 3) {
-                    pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + 1);
-                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
-                    janelaRecepção = (short) mensagem.getPacotes().get(ultimoPacoteEnviado(mensagem) + 1).getTamanhoJanela();
+                    pacote.setNumeroSequencia(mensagem.getPacotes().get(indiceUltimoPacote(mensagem) - 1).getNumeroSequencia() + 1);
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia() + 1);
+                    //janelaRecepção = (short) mensagem.getPacotes().get(ultimoPacoteEnviado(mensagem) + 1).getTamanhoJanela();
                     //System.out.println("teste numero recepção: " + janelaRecepção);
                 } else if (mensagem.getPacotes().size() == 4) {
-                    pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
-                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
+                    pacote.setNumeroSequencia(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia());
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
                     //contendo os dados
 
                 } else if (verificaSeReenvio(pacoteAtual)) {
                     pacote.setNumeroSequencia(pacoteAtual.getNumeroAvisoRecepcao());
-                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia() + 1);
 
                 } else {
-                    if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
-                        pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + defineTamanhoSegmento());
+                    if (mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
+                        pacote.setNumeroSequencia(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia() + defineTamanhoSegmento());
                     } else {
-                        pacote.setNumeroSequencia(mensagem.getPacotes().get(retornaUltimoPacote(mensagem) - 1).getNumeroSequencia() + defineTamanhoSegmento());
+                        pacote.setNumeroSequencia(mensagem.getPacotes().get(indiceUltimoPacote(mensagem) - 1).getNumeroSequencia() + defineTamanhoSegmento());
                         System.out.println("TAMANHO MSS: " + defineTamanhoSegmento());
                     }
-                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia() + 1);
+                    pacote.setNumeroAvisoRecepcao(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia() + 1);
                 }
                     
                 
@@ -301,7 +309,7 @@ public class BemVindo extends javax.swing.JFrame {
                 pacote.setPortaOrigem((short) 5000);
                 pacote.setPortaDestino((short) 5000);
 
-                if (mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao() == 0) {
+                if (mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao() == 0) {
                     pacote.setNumeroSequencia(valorAleatorio());
 
                 } else {
@@ -375,9 +383,9 @@ public class BemVindo extends javax.swing.JFrame {
 
                 setarValores(pacoteAtual);
 
-                mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setAceito(true);
+                mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).setAceito(true);
 
-                adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
+                adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
                 this.mensagem.setAction(Action.ENVIAR);
                 this.service.enviar(mensagem);
             }
@@ -389,9 +397,9 @@ public class BemVindo extends javax.swing.JFrame {
 
     private void setarPaineis() {
 
-        setarValores(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
-        mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setAceito(false);
-        adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
+        setarValores(mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
+        mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).setAceito(false);
+        adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
         janelaRecepção--;
 
     }
@@ -401,7 +409,7 @@ public class BemVindo extends javax.swing.JFrame {
         return gerador.nextInt(11700621) + 40700621;
     }
 
-    private int retornaUltimoPacote(Mensagem mensagem) {
+    private int indiceUltimoPacote(Mensagem mensagem) {
 
         return (mensagem.getPacotes().size() - 1);
     }
@@ -431,11 +439,6 @@ public class BemVindo extends javax.swing.JFrame {
         return (painel);
     }
 
-    private void adicionarPainelBranco(PainelPacote painel) {
-        painel.painelScroll.add(painel.novoPainelVazio());
-        painel.painelScroll.revalidate();
-        painel.painelScroll.repaint();
-    }
 
     private void preencherPainel(PainelPacote painel, Pacote pacote) {
 
@@ -512,32 +515,40 @@ public class BemVindo extends javax.swing.JFrame {
     private void acionarBotaoAceitar(PainelPacote painel, Pacote pacote) {
         painel.getBtnAceitar().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceitarActionPerformed(evt, pacote);
+                btnAceitarActionPerformed(evt, pacote, painel);                
             }
         });
     }
 
-    private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt, Pacote pacote) {
-
+    private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt, Pacote pacote, PainelPacote painel) {
+        painel.btnAceitar.setEnabled(false);
+        painel.btnRecusar.setEnabled(false);
         System.out.println("---------------------- \n --------------");
         System.out.println("Recebendo BOTÃO ACeitar:");
         System.out.println("Qtd Pacotes: " + mensagem.getPacotes().size());
-        System.out.println("NumSeq: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroSequencia());
-        System.out.println("NumRecp: " + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
+        System.out.println("NumSeq: " + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroSequencia());
+        System.out.println("NumRecp: " + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getNumeroAvisoRecepcao());
         System.out.println("----------------------");
-        janelaRecepção++;
+        
+        try {
+            if(!mensagem.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())){
+                janelaRecepção++;
+            }
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 //estou enviando junto o pacote em questão, para que seja modificado com um foreach
         if (paineis.size() == 1) {
             setarValores(pacote);
             aba.painelDesktop.setVisible(true);
-            adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
+            adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
         } else if (paineis.size() <= 3) {
 
             setarValores(pacote);
 
-            mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).setAceito(true);
+            mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).setAceito(true);
 
-            adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
+            adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
 
             if (paineis.size() == 3) {
                 enviarPacotes(pacote);
@@ -765,9 +776,9 @@ public class BemVindo extends javax.swing.JFrame {
 
         aba = new PainelPacote(mensagem, service);
 
-        JtabAbas.addTab("Mensagem " + mensagem.getIpDestino(), adicionarNovoPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem))));
-        preencherPainel(aba, mensagem.getPacotes().get(retornaUltimoPacote(mensagem)));
-        System.out.println("Janela recp após preencher:" + mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela());
+        JtabAbas.addTab("Mensagem " + mensagem.getIpDestino(), adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem))));
+        preencherPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
+        System.out.println("Janela recp após preencher:" + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getTamanhoJanela());
         JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
     }//GEN-LAST:event_btnThreeWayHandshakeActionPerformed
 

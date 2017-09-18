@@ -289,7 +289,7 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
             Logger.getLogger(Parametros.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        mensagem.setTamanhoMensagem(Short.valueOf(txtQuantidadeDados.getText()));
+        mensagem.setTamanhoMensagem(Integer.valueOf(txtQuantidadeDados.getText()));       
         mensagem.setMensagem(txtMensagem.getText());
         
         fecharParametros(aba);
