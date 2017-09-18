@@ -805,13 +805,9 @@ public class BemVindo extends javax.swing.JFrame {
 
         new Thread(new ListenerSocket(this.socket)).start();
 
-        try {
+     
 
-            this.mensagem.setIpOrigem(InetAddress.getLocalHost().getHostAddress());
-
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            this.mensagem.setIpOrigem(txtIpOrigem.getText());      
 
         //this.mensagem.setIpOrigem(txtIpOrigem.getText());
         this.service.enviar(mensagem);

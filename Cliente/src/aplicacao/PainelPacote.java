@@ -40,7 +40,7 @@ public class PainelPacote extends JPanel {
     public JPanel painelInterno;
     public JScrollPane scroll;
     public JDesktopPane painelDesktop;
-    public JInternalFrame painelParametros;
+    public JPanel painelParametros;
     public Parametros parametros;
     //public JPanel painelJanela; Possivelmente inserir um recurso visual para mostrar a janela de recepção
 
@@ -99,26 +99,35 @@ public class PainelPacote extends JPanel {
     public PainelPacote(Mensagem mensagem,ClienteService service) {
 
         painelPrincipal = new JPanel();
+        //painelPrincipal.setVisible(false);
+        
+        
         painelScroll = new JPanel();
+        painelScroll.setBackground(new java.awt.Color(0,51,0));
+        
         scroll = new JScrollPane();
-        painelDesktop = new JDesktopPane();
-        painelDesktop.setLayout(null);
-        painelParametros = new JInternalFrame();
+        scroll.setBackground(Color.BLACK);
+        scroll.setVisible(false);
+        //painelDesktop = new JDesktopPane();
+        //painelDesktop.setLayout(null);
+        painelParametros = new JPanel();
+        painelParametros.setBackground(new java.awt.Color(0,102,51));
         parametros = new Parametros(this, service, mensagem);
         painelParametros.add(parametros);
         //painelJanela = new JPanel();
         
 
              
-        painelDesktop.setPreferredSize(new Dimension(600, 600));      
+        //painelDesktop.setPreferredSize(new Dimension(600, 600));      
         scroll.setPreferredSize(new Dimension(820, 600));
         
         painelPrincipal.setBackground(new java.awt.Color(0,102,51));
         painelPrincipal.setPreferredSize(new Dimension(820, 800)); 
-        painelDesktop.setOpaque(false);
-        painelDesktop.add(painelParametros);
-        painelParametros.setVisible(true);
-        painelParametros.pack();
+        //painelPrincipal.setBackground(Color.RED);
+        //painelDesktop.setOpaque(false);
+        //painelDesktop.add(painelParametros);
+        painelParametros.setPreferredSize(new Dimension(600, 800));
+        
         
         painelPrincipal.add(scroll);
         scroll.add(painelScroll);
@@ -126,7 +135,8 @@ public class PainelPacote extends JPanel {
         //this.add(painelJanela); Possivelmente inserir um recurso visual para mostrar a janela de recepção
         
         this.add(painelPrincipal);
-        this.add(painelDesktop);        
+        //this.add(painelDesktop);     
+        this.add(painelParametros);
         this.setBackground(new java.awt.Color(0,102,51));
         
         //painel.add(scroll);

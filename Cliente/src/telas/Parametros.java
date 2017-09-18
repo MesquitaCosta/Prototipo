@@ -70,6 +70,7 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
         txtMSS = new javax.swing.JTextField();
         sliderMSS = new javax.swing.JSlider();
         btnOK = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMensagem = new javax.swing.JTextArea();
 
@@ -199,6 +200,9 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mensagem", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+
         txtMensagem.setColumns(20);
         txtMensagem.setLineWrap(true);
         txtMensagem.setRows(5);
@@ -206,22 +210,35 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
         txtMensagem.setMaximumSize(new java.awt.Dimension(200, 305));
         jScrollPane1.setViewportView(txtMensagem);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btnOK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(80, 80, 80))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1)))
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(pnlParametros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,11 +246,13 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(76, 76, 76)
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlParametros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30))
+                        .addComponent(pnlParametros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         bindingGroup.bind();
@@ -250,6 +269,7 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblQuantidadeDados;
     private javax.swing.JLabel lblTamanhoJanela;
@@ -264,9 +284,22 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void fecharParametros(PainelPacote aba) {
+    private void fecharParametros() {
 
-        aba.painelDesktop.setVisible(false);
+        txtTamanhoJanela.setEnabled(false);
+        sliderTamanhoJanela.setEnabled(false);
+        lblTamanhoJanela.setEnabled(false);
+        lblQuantidadeDados.setEnabled(false);
+        txtQuantidadeDados.setEnabled(false);
+        sliderTamanhoMensagem.setEnabled(false);
+        txtTamanhoJanela.setEnabled(false);
+        sliderTamanhoJanela.setEnabled(false);
+        lblTamanhoJanela.setEnabled(false);
+        jScrollPane1.setEnabled(false);
+        txtMensagem.setEnabled(false);
+        sliderMSS.setEnabled(false);
+        aba.scroll.setVisible(true);
+        btnOK.setVisible(false);
     }
 
     private int retornaUltimoPacote(Mensagem mensagem) {
@@ -292,7 +325,7 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
         mensagem.setTamanhoMensagem(Integer.valueOf(txtQuantidadeDados.getText()));       
         mensagem.setMensagem(txtMensagem.getText());
         
-        fecharParametros(aba);
+        fecharParametros();
         return mensagem;
     }
 
