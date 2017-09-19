@@ -6,7 +6,7 @@
 package telas;
 
 import aplicacao.Mensagem;
-import aplicacao.PainelPacote;
+import aplicacao.PainelPacotes;
 import aplicacao.Pacote;
 import aplicacao.PreencherPainel;
 import java.awt.DisplayMode;
@@ -27,12 +27,12 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
     /**
      * Creates new form Parametros
      */
-    private PainelPacote aba;
+    private PainelPacotes aba;
     private Pacote pacote;
     private Mensagem mensagem;
     private ClienteService service;
     
-    public Parametros(PainelPacote aba, ClienteService service, Mensagem mensagem) {
+    public Parametros(PainelPacotes aba, ClienteService service, Mensagem mensagem) {
         initComponents();
 
         this.aba = aba;
@@ -341,21 +341,21 @@ public class Parametros extends javax.swing.JPanel implements PreencherPainel {
         return mensagem;
     }
 
-    public void preenche(PainelPacote painel) {
+    public void preenche(PainelPacotes aba) {
         
         try {
             if (mensagem.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
 
-                painel.getSYN().setSelected(true);
-                painel.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
+                aba.painelInterno.getSYN().setSelected(true);
+                aba.painelInterno.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
                 
                 
             } else {
-                painel.paineis.get(painel.paineis.size()-1).setVisible(true);
-                painel.setTxtJanelaRecepcaoX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela()));
-                painel.getSYN().setSelected(true);
-                painel.getACK().setSelected(true);
-                painel.setTxtOptionsX(String.valueOf(mensagem.getMssReceptor()));              
+                aba.paineis.get(aba.paineis.size()-1).setVisible(true);
+                aba.painelInterno.setTxtJanelaRecepcaoX(String.valueOf(mensagem.getPacotes().get(retornaUltimoPacote(mensagem)).getTamanhoJanela()));
+                aba.painelInterno.getSYN().setSelected(true);
+                aba.painelInterno.getACK().setSelected(true);
+                aba.painelInterno.setTxtOptionsX(String.valueOf(mensagem.getMssReceptor()));              
             }
         } catch (UnknownHostException ex) {
             Logger.getLogger(Parametros.class.getName()).log(Level.SEVERE, null, ex);

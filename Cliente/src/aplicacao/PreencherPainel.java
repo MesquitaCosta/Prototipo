@@ -11,5 +11,5 @@ package aplicacao;
  */
 public interface PreencherPainel {
     
-    void preenche(PainelPacote painel);
+    void preenche(PainelPacotes painel);
 }

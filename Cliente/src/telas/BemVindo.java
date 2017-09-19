@@ -8,7 +8,8 @@ package telas;
 import aplicacao.Mensagem;
 import aplicacao.Mensagem.Action;
 import aplicacao.Pacote;
-import aplicacao.PainelPacote;
+import aplicacao.PainelInterno;
+import aplicacao.PainelPacotes;
 import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -32,6 +33,54 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import service.ClienteService;
 import javax.swing.Timer;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -179,10 +228,10 @@ public class BemVindo extends javax.swing.JFrame {
 
         } else {
 
-            aba = new PainelPacote(mensagem, service);
+            aba = new PainelPacotes(mensagem, service);
             JtabAbas.addTab("Mensagem " + mensagem.getIpOrigem(), adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem))));
             JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
-            aba.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
+            aba.painelInterno.setTxtOptionsX(String.valueOf(mensagem.getMssEmissor()));
         }
     }
 
@@ -405,8 +454,9 @@ public class BemVindo extends javax.swing.JFrame {
     }
 
     private int valorAleatorio() {
-        Random gerador = new Random();
-        return gerador.nextInt(11700621) + 40700621;
+        //Random gerador = new Random();
+        //return gerador.nextInt(11700621) + 40700621;
+        return 429;
     }
 
     private int indiceUltimoPacote(Mensagem mensagem) {
@@ -414,7 +464,7 @@ public class BemVindo extends javax.swing.JFrame {
         return (mensagem.getPacotes().size() - 1);
     }
 
-    private int retornaUltimoPainel(Mensagem mensagem) {
+    private int retornaUltimoPainel() {
 
         return (aba.paineis.size() - 1);
     }
@@ -424,23 +474,23 @@ public class BemVindo extends javax.swing.JFrame {
         return (mensagem.getTamanhoMensagem() - defineTamanhoSegmento());
     }
 
-    private JPanel adicionarNovoPainel(PainelPacote painel, Pacote pacote) {
+    private JPanel adicionarNovoPainel(PainelPacotes painel, Pacote pacote) {
 
         painel.painelScroll.setLayout(new GridLayout(100, 1));
         painel.painelScroll.add(BorderLayout.NORTH, painel.novoPainel());
         //preencherPainel(painel);
-        preencherPainel(painel, pacote);
+        preencherPainel(painel.painelInterno, pacote);
         painel.painelScroll.revalidate();
         painel.painelScroll.repaint();
 
-        acionarBotaoAceitar(painel, pacote);
+        acionarBotaoAceitar(painel.painelInterno, pacote);
 
         aba.paineis.add(painel.painelInterno);
         return (painel);
     }
 
 
-    private void preencherPainel(PainelPacote painel, Pacote pacote) {
+    private void preencherPainel(PainelInterno painel, Pacote pacote) {
 
         if (aba.paineis.size() >= 2) {
             painel.setTxtOptionsX("-----");
@@ -457,7 +507,7 @@ public class BemVindo extends javax.swing.JFrame {
             if (pacote.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
                 painel.getBtnAceitar().setVisible(false);
                 painel.getBtnRecusar().setVisible(false);
-                painel.painelInterno.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 255, 153), 5));
+                painel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 255, 153), 5));
                 carregarBarraprogresso(painel);
 
                 timer.start();
@@ -476,7 +526,7 @@ public class BemVindo extends javax.swing.JFrame {
 
                 }
                 painel.getBarraProgresso().setVisible(false);
-                painel.painelInterno.setBorder(BorderFactory.createLineBorder(new java.awt.Color(255, 102, 102), 5));
+                painel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(255, 102, 102), 5));
 
                 if (mensagem.getPacotes().size() == 2) {
                     painel.getSYN().setSelected(true);
@@ -497,7 +547,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     }
 
-    private void carregarBarraprogresso(PainelPacote painel) {
+    private void carregarBarraprogresso(PainelInterno painel) {
 
         atualizaBarra = new ActionListener() {
             public void actionPerformed(ActionEvent evento) {
@@ -512,15 +562,16 @@ public class BemVindo extends javax.swing.JFrame {
         timer = new Timer(300, atualizaBarra);
     }
 
-    private void acionarBotaoAceitar(PainelPacote painel, Pacote pacote) {
-        painel.getBtnAceitar().addActionListener(new java.awt.event.ActionListener() {
+    private void acionarBotaoAceitar(PainelInterno painel, Pacote pacote) {
+        aba.painelInterno.getBtnAceitar().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceitarActionPerformed(evt, pacote, painel);                
             }
         });
     }
 
-    private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt, Pacote pacote, PainelPacote painel) {
+    private void btnAceitarActionPerformed(java.awt.event.ActionEvent evt, Pacote pacote, PainelInterno painel) {
+        
         painel.btnAceitar.setEnabled(false);
         painel.btnRecusar.setEnabled(false);
         System.out.println("---------------------- \n --------------");
@@ -776,10 +827,10 @@ public class BemVindo extends javax.swing.JFrame {
 
         solicitaConexao();
 
-        aba = new PainelPacote(mensagem, service);
+        aba = new PainelPacotes(mensagem, service);
 
         JtabAbas.addTab("Mensagem " + mensagem.getIpDestino(), adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem))));
-        preencherPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
+        preencherPainel(aba.painelInterno, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
         System.out.println("Janela recp após preencher:" + mensagem.getPacotes().get(indiceUltimoPacote(mensagem)).getTamanhoJanela());
         JtabAbas.setSelectedIndex(mensagem.getIdMensagem());
     }//GEN-LAST:event_btnThreeWayHandshakeActionPerformed
@@ -877,7 +928,7 @@ public class BemVindo extends javax.swing.JFrame {
     EnvioDeMensagens telaEnvio = new EnvioDeMensagens();    
     private Timer timer;
     private ActionListener atualizaBarra;
-    private PainelPacote aba;
+    private PainelPacotes aba;
     private int count = 0;
     short janelaRecepção = 0;
 }
