@@ -8,15 +8,23 @@ package aplicacao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.DisplayMode;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,6 +43,8 @@ import telas.Parametros;
  */
 public class PainelPacote extends JPanel {
 
+    DisplayMode monitor = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
+
     public JPanel painelPrincipal;
     public JPanel painelScroll;
     public JPanel painelInterno;
@@ -42,6 +52,7 @@ public class PainelPacote extends JPanel {
     public JDesktopPane painelDesktop;
     public JPanel painelParametros;
     public Parametros parametros;
+    public ArrayList<JPanel> paineis = new ArrayList<>();
     //public JPanel painelJanela; Possivelmente inserir um recurso visual para mostrar a janela de recepção
 
     JLabel lbl1;
@@ -107,13 +118,25 @@ public class PainelPacote extends JPanel {
         
         scroll = new JScrollPane();
         scroll.setBackground(Color.BLACK);
-        scroll.setVisible(false);
-        //painelDesktop = new JDesktopPane();
-        //painelDesktop.setLayout(null);
+        
         painelParametros = new JPanel();
         painelParametros.setBackground(new java.awt.Color(0,102,51));
         parametros = new Parametros(this, service, mensagem);
         painelParametros.add(parametros);
+        try {
+            if (mensagem.getIpOrigem().equals(InetAddress.getLocalHost().getHostAddress())) {
+                scroll.setVisible(false);
+            }
+            else{
+                painelParametros.setVisible(false);
+            }
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PainelPacote.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //painelDesktop = new JDesktopPane();
+        //painelDesktop.setLayout(null);
+        
         //painelJanela = new JPanel();
         
 
@@ -122,21 +145,22 @@ public class PainelPacote extends JPanel {
         scroll.setPreferredSize(new Dimension(820, 600));
         
         painelPrincipal.setBackground(new java.awt.Color(0,102,51));
-        painelPrincipal.setPreferredSize(new Dimension(820, 800)); 
+       // painelPrincipal.setPreferredSize(new Dimension(820, 800)); 
         //painelPrincipal.setBackground(Color.RED);
         //painelDesktop.setOpaque(false);
         //painelDesktop.add(painelParametros);
-        painelParametros.setPreferredSize(new Dimension(600, 800));
+        painelParametros.setPreferredSize(new Dimension(600, 600));
         
-        
+        this.add(painelPrincipal);
         painelPrincipal.add(scroll);
+        painelPrincipal.add(painelParametros);
         scroll.add(painelScroll);
    
         //this.add(painelJanela); Possivelmente inserir um recurso visual para mostrar a janela de recepção
         
-        this.add(painelPrincipal);
+        
         //this.add(painelDesktop);     
-        this.add(painelParametros);
+        //this.add(painelParametros);
         this.setBackground(new java.awt.Color(0,102,51));
         
         //painel.add(scroll);

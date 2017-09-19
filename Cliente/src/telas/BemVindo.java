@@ -57,7 +57,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     public BemVindo() {
 
-        super("FlowLayout");
+        super("TCC Maldito");
         initComponents();
 
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -416,7 +416,7 @@ public class BemVindo extends javax.swing.JFrame {
 
     private int retornaUltimoPainel(Mensagem mensagem) {
 
-        return (paineis.size() - 1);
+        return (aba.paineis.size() - 1);
     }
 
     private int DadosRestantes() {
@@ -435,14 +435,14 @@ public class BemVindo extends javax.swing.JFrame {
 
         acionarBotaoAceitar(painel, pacote);
 
-        paineis.add(painel);
+        aba.paineis.add(painel.painelInterno);
         return (painel);
     }
 
 
     private void preencherPainel(PainelPacote painel, Pacote pacote) {
 
-        if (paineis.size() >= 2) {
+        if (aba.paineis.size() >= 2) {
             painel.setTxtOptionsX("-----");
             painel.setTxtDadosX(String.valueOf(defineTamanhoSegmento()));
         }
@@ -538,11 +538,12 @@ public class BemVindo extends javax.swing.JFrame {
             Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
         }
 //estou enviando junto o pacote em questão, para que seja modificado com um foreach
-        if (paineis.size() == 1) {
+        if (aba.paineis.size() == 1) {
             setarValores(pacote);
-            aba.painelDesktop.setVisible(true);
+            aba.painelParametros.setVisible(true);
             adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
-        } else if (paineis.size() <= 3) {
+            aba.paineis.get(aba.paineis.size()-1).setVisible(false);
+        } else if (aba.paineis.size() <= 3) {
 
             setarValores(pacote);
 
@@ -550,7 +551,7 @@ public class BemVindo extends javax.swing.JFrame {
 
             adicionarNovoPainel(aba, mensagem.getPacotes().get(indiceUltimoPacote(mensagem)));
 
-            if (paineis.size() == 3) {
+            if (aba.paineis.size() == 3) {
                 enviarPacotes(pacote);
                 //o primeiro pacote tem de ser igual ao ultimo NumSEQ que enviei com ACK
             }
@@ -685,14 +686,15 @@ public class BemVindo extends javax.swing.JFrame {
                             .addGroup(pnlInicioLayout.createSequentialGroup()
                                 .addComponent(btnIniciarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSair))
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))
                             .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnThreeWayHandshake)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnlInicioLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlInicioLayout.setVerticalGroup(
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,8 +874,7 @@ public class BemVindo extends javax.swing.JFrame {
     private Mensagem mensagem;
     private ClienteService service;
     private Pacote pacote;
-    EnvioDeMensagens telaEnvio = new EnvioDeMensagens();
-    private ArrayList<PainelPacote> paineis = new ArrayList<>();
+    EnvioDeMensagens telaEnvio = new EnvioDeMensagens();    
     private Timer timer;
     private ActionListener atualizaBarra;
     private PainelPacote aba;
